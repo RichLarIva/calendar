@@ -1,6 +1,6 @@
 <?php
     class Calendar {  
-     
+
         /**
          * Constructor
          */
@@ -9,17 +9,387 @@
         }
          
         /********************* PROPERTY ********************/  
-        private $dayLabels = array("Mon","Tue","Wed","Thu","Fri","Sat","Sun");
+        private $dayLabels = array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday");
          
         private $currentYear=0;
          
         private $currentMonth=0;
          
+
+        private $nameDays = [
+            [],
+            ["Svea"],
+            ["Alfred", "Alfrida"],
+            ["Rut"],
+            ["Hanna", "Hannele"],
+            ["Kasper", "Melker", "Baltsar"],
+            ["August", "Augusta"],
+            ["Erland"],
+            ["Gunnar", "Gunder"],
+            ["Sigurd", "Sigbritt"],
+            ["Jan", "Jannike"],
+            ["Frideborg", "Fridolf"],
+            ["Knut"],
+            ["Felix", "Felicia"],
+            ["Laura", "Lorentz"],
+            ["Hjalmar", "Helmer"],
+            ["Anton", "Tony"],
+            ["Hilda", "Hildur"],
+            ["Henrik"],
+            ["Fabian", "Sebastian"],
+            ["Agnes", "Agneta"],
+            ["Vincent", "Viktor"],
+            ["Frej", "Freja"],
+            ["Erika"],
+            ["Paul", "Pål"],
+            ["Bodil", "Boel"],
+            ["Göte", "Göta"],
+            ["Karl", "Karla"],
+            ["Diana"],
+            ["Gunilla", "Gunhild"],
+            ["Ivar", "Joar"],
+            ["Max", "Maximilian"],
+            [],
+            ["Disa", "Hjördis"],
+            ["Ansgar", "Anselm"],
+            ["Agata", "Agda"],
+            ["Dorotea", "Doris"],
+            ["Rikard", "Dick"],
+            ["Berta", "Bert"],
+            ["Fanny", "Franciska"],
+            ["Iris"],
+            ["Yngve", "Inge"],
+            ["Evelina", "Evy"],
+            ["Agne", "Ove"],
+            ["Valentin"],
+            ["Sigfrid"],
+            ["Julia", "Julius"],
+            ["Alexandra", "Sandra"],
+            ["Frida", "Fritiof"],
+            ["Gabriella", "Ella"],
+            ["Vivianne"],
+            ["Hilding"],
+            ["Pia"],
+            ["Torsten", "Torun"],
+            ["Mattias", "Mats"],
+            ["Sigvard", "Sivert"],
+            ["Torgny", "Torkel"],
+            ["Lage"],
+            ["Maria"],
+            [],
+            ["Albin", "Elvira"],
+            ["Ernst", "Erna"],
+            ["Gunborg", "Gunvor"],
+            ["Adrian", "Adriana"],
+            ["Tora", "Tove"],
+            ["Ebba", "Ebbe"],
+            ["Camilla"],
+            ["Siv"],
+            ["Torbjörn", "Torleif"],
+            ["Edla", "Ada"],
+            ["Edvin", "Egon"],
+            ["Viktoria"],
+            ["Greger"],
+            ["Matilda", "Maud"],
+            ["Kristoffer", "Christel"],
+            ["Herbert", "Gilbert"],
+            ["Gertrud"],
+            ["Edvard", "Edmund"],
+            ["Josef", "Josefina"],
+            ["Joakim", "Kim"],
+            ["Bengt"],
+            ["Kennet", "Kent"],
+            ["Gerda", "Gerd"],
+            ["Gabriel", "Rafael"],
+            [],
+            ["Emanuel"],
+            ["Rudolf", "Ralf"],
+            ["Malkolm", "Morgan"],
+            ["Jonas", "Jens"],
+            ["Holger", "Holmfrid"],
+            ["Ester"],
+            ["Harald", "Hervor"],
+            ["Gudmund", "Ingemund"],
+            ["Ferdinand", "Nanna"],
+            ["Marianne", "Marlene"],
+            ["Irene", "Irja"],
+            ["Vilhelm", "William"],
+            ["Irma", "Irmelin"],
+            ["Nadja", "Tanja"],
+            ["Otto", "Ottilia"],
+            ["Ingvar", "Ingvor"],
+            ["Ulf", "Ylva"],
+            ["Liv"],
+            ["Artur", "Douglas"],
+            ["Tiburtius"],
+            ["Olivia", "Oliver"],
+            ["Patrik", "Patricia"],
+            ["Elias", "Elis"],
+            ["Valdemar", "Volmar"],
+            ["Olaus", "Ola"],
+            ["Amalia", "Amelie"],
+            ["Anneli", "Annika"],
+            ["Allan", "Glenn"],
+            ["Georg", "Göran"],
+            ["Vega"],
+            ["Markus"],
+            ["Teresia", "Terese"],
+            ["Engelbrekt"],
+            ["Ture", "Tyra"],
+            ["Tyko"],
+            ["Mariana"],
+            ["Valborg"],
+            ["Filip", "Filippa"],
+            ["John", "Jane"],
+            ["Monika", "Mona"],
+            ["Gotthard", "Erhard"],
+            ["Marit", "Rita"],
+            ["Carina", "Carita"],
+            ["Åke"],
+            ["Reidar", "Reidun"],
+            ["Esbjörn", "Styrbjörn"],
+            ["Märta", "Märit"],
+            ["Charlotta", "Lotta"],
+            ["Linnea", "Linn"],
+            ["Halvard", "Halvar"],
+            ["Sofia", "Sonja"],
+            ["Ronald", "Ronny"],
+            ["Rebecka", "Ruben"],
+            ["Erik"],
+            ["Maj", "Majken"],
+            ["Karolina", "Carola"],
+            ["Konstantin", "Conny"],
+            ["Hemming", "Henning"],
+            ["Desideria", "Desirée"],
+            ["Ivan", "Vanja"],
+            ["Urban"],
+            ["Vilhelmina", "Vilma"],
+            ["Beda", "Blenda"],
+            ["Ingeborg", "Borghild"],
+            ["Yvonne", "Jeanette"],
+            ["Vera", "Veronika"],
+            ["Petronella", "Pernilla"],
+            ["Gun", "Gunnel"],
+            ["Rutger", "Roger"],
+            ["Ingemar", "Gudmar"],
+            ["Solbritt", "Solveig"],
+            ["Bo"],
+            ["Gustav", "Gösta"],
+            ["Robert", "Robin"],
+            ["Eivor", "Majvor"],
+            ["Börje", "Birger"],
+            ["Svante", "Boris"],
+            ["Bertil", "Berthold"],
+            ["Eskil"],
+            ["Aina", "Aino"],
+            ["Håkan", "Hakon"],
+            ["Margit", "Margot"],
+            ["Axel", "Axelina"],
+            ["Torborg", "Torvald"],
+            ["Björn", "Bjarne"],
+            ["Germund", "Görel"],
+            ["Linda"],
+            ["Alf", "Alvar"],
+            ["Paulina", "Paula"],
+            ["Adolf", "Alice"],
+            [],
+            ["David", "Salomon"],
+            ["Rakel", "Lea"],
+            ["Selma", "Fingal"],
+            ["Leo"],
+            ["Peter", "Petra"],
+            ["Elof", "Leif"],
+            ["Aron", "Mirjam"],
+            ["Rosa", "Rosita"],
+            ["Aurora"],
+            ["Ulrika", "Ulla"],
+            ["Laila", "Ritva"],
+            ["Esaias", "Jessika"],
+            ["Klas"],
+            ["Kjell"],
+            ["Jörgen", "Örjan"],
+            ["André", "Andrea"],
+            ["Eleonora", "Ellinor"],
+            ["Herman", "Hermine"],
+            ["Joel", "Judit"],
+            ["Folke"],
+            ["Ragnhild", "Ragnvald"],
+            ["Reinhold", "Reine"],
+            ["Bruno"],
+            ["Fredrik", "Fritz"],
+            ["Sara"],
+            ["Margareta", "Greta"],
+            ["Johanna"],
+            ["Magdalena", "Madeleine"],
+            ["Emma", "Emmy"],
+            ["Kristina", "Kerstin"],
+            ["Jakob"],
+            ["Jesper", "Jasmine"],
+            ["Marta"],
+            ["Botvid", "Seved"],
+            ["Olof"],
+            ["Algot"],
+            ["Helena", "Elin"],
+            ["Per"],
+            ["Karin", "Kajsa"],
+            ["Tage"],
+            ["Arne", "Arnold"],
+            ["Ulrik", "Alrik"],
+            ["Alfons", "Inez"],
+            ["Dennis", "Denise"],
+            ["Silvia", "Sylvia"],
+            ["Roland"],
+            ["Lars"],
+            ["Susanna"],
+            ["Klara"],
+            ["Kaj"],
+            ["Uno"],
+            ["Stella", "Estelle"],
+            ["Brynolf"],
+            ["Verner", "Valter"],
+            ["Ellen", "Lena"],
+            ["Magnus", "Måns"],
+            ["Bernhard", "Bernt"],
+            ["Jon", "Jonna"],
+            ["Henrietta", "Henrika"],
+            ["Signe", "Signhild"],
+            ["Bartolomeus"],
+            ["Lovisa", "Louise"],
+            ["Östen"],
+            ["Rolf", "Raoul"],
+            ["Fatima", "Leila"],
+            ["Hans", "Hampus"],
+            ["Albert", "Albertina"],
+            ["Arvid", "Vidar"],
+            ["Sam", "Samuel"],
+            ["Justus", "Justina"],
+            ["Alfhild", "Alva"],
+            ["Gisela"],
+            ["Adela", "Heidi"],
+            ["Lilian", "Lilly"],
+            ["Kevin", "Roy"],
+            ["Alma", "Hulda"],
+            ["Anita", "Annette"],
+            ["Tord", "Turid"],
+            ["Dagny", "Helny"],
+            ["Åsa", "Åslög"],
+            ["Sture"],
+            ["Ida"],
+            ["Sigrid", "Siri"],
+            ["Dag", "Daga"],
+            ["Hildegard", "Magnhild"],
+            ["Orvar"],
+            ["Fredrika"],
+            ["Elise", "Lisa"],
+            ["Matteus"],
+            ["Maurits", "Moritz"],
+            ["Tekla", "Tea"],
+            ["Gerhard", "Gert"],
+            ["Tryggve"],
+            ["Enar", "Einar"],
+            ["Dagmar", "Rigmor"],
+            ["Lennart", "Leonard"],
+            ["Mikael", "Mikaela"],
+            ["Helge"],
+            ["Ragnar", "Ragna"],
+            ["Ludvig", "Love"],
+            ["Evald", "Osvald"],
+            ["Frans", "Frank"],
+            ["Bror"],
+            ["Jenny", "Jennifer"],
+            ["Birgitta", "Britta"],
+            ["Nils"],
+            ["Ingrid", "Inger"],
+            ["Harry", "Harriet"],
+            ["Erling", "Jarl"],
+            ["Valfrid", "Manfred"],
+            ["Berit", "Birgit"],
+            ["Stellan"],
+            ["Hedvig", "Hillevi"],
+            ["Finn"],
+            ["Antonia", "Toini"],
+            ["Lukas"],
+            ["Tore", "Tor"],
+            ["Sibylla"],
+            ["Ursula", "Yrsa"],
+            ["Marika", "Marita"],
+            ["Severin", "Sören"],
+            ["Evert", "Eilert"],
+            ["Inga", "Ingalill"],
+            ["Amanda", "Rasmus"],
+            ["Sabina"],
+            ["Simon", "Simone"],
+            ["Viola"],
+            ["Elsa", "Isabella"],
+            ["Edit", "Edgar"],
+            [],
+            ["Tobias"],
+            ["Hubert", "Hugo"],
+            ["Sverker"],
+            ["Eugen", "Eugenia"],
+            ["Gustav Adolf"],
+            ["Ingegerd", "Ingela"],
+            ["Vendela"],
+            ["Teodor", "Teodora"],
+            ["Martin", "Martina"],
+            ["Mårten"],
+            ["Konrad", "Kurt"],
+            ["Kristian", "Krister"],
+            ["Emil", "Emilia"],
+            ["Leopold"],
+            ["Vibeke", "Viveka"],
+            ["Naemi", "Naima"],
+            ["Lillemor", "Moa"],
+            ["Elisabet", "Lisbet"],
+            ["Pontus", "Marina"],
+            ["Helga", "Olga"],
+            ["Cecilia", "Sissela"],
+            ["Klemens"],
+            ["Gudrun", "Rune"],
+            ["Katarina", "Katja"],
+            ["Linus"],
+            ["Astrid", "Asta"],
+            ["Malte"],
+            ["Sune"],
+            ["Andreas", "Anders"],
+            ["Oskar", "Ossian"],
+            ["Beata", "Beatrice"],
+            ["Lydia"],
+            ["Barbara", "Barbro"],
+            ["Sven"],
+            ["Nikolaus", "Niklas"],
+            ["Angela", "Angelika"],
+            ["Virginia"],
+            ["Anna"],
+            ["Malin", "Malena"],
+            ["Daniel", "Daniela"],
+            ["Alexander", "Alexis"],
+            ["Lucia"],
+            ["Sten", "Sixten"],
+            ["Gottfrid"],
+            ["Assar"],
+            ["Stig"],
+            ["Abraham"],
+            ["Isak"],
+            ["Israel", "Moses"],
+            ["Tomas"],
+            ["Natanael", "Jonatan"],
+            ["Adam"],
+            ["Eva"],
+            [],
+            ["Stefan", "Staffan"],
+            ["Johannes", "Johan"],
+            ["Benjamin"],
+            ["Natalia", "Natalie"],
+            ["Abel", "Set"],
+            ["Sylvester"],
+        ];
+
         private $currentDay=0;
         
         private $currentWeek=0;
 
-        private $currentDate=null;
+        public $currentDate=null;
          
         private $daysInMonth=0;
          
@@ -44,7 +414,7 @@
                 $year = date("Y",time());  
              
             }          
-             
+
             if(null==$month&&isset($_GET['month'])){
      
                 $month = $_GET['month'];
@@ -122,15 +492,67 @@
      
                 $cellContent=null;
             }
-                 
-            if($cellNumber%7==1 && $cellContent != null){
-                return '<li id="li-'.$this->currentDate.'" class="start">'.$cellContent." <span class='weekNum'>".date("W", strtotime($this->currentDate)).'</span></li>';
+            if(date("L", strtotime($this->currentDate)) == 0 && $this->currentMonth >= 03){
+                $day365 = date("z", strtotime($this->currentDate));
+                $day365 = (int)$day365 + 1;
+                $arrt = implode(' ', $this->nameDays[$day365]);
             }
+            else{
+                $day365 = date("z", strtotime($this->currentDate));
+                $day365 = (int)$day365;
+                $arrt = implode(' ', $this->nameDays[$day365]);
+            }
+            
+            
 
+            if($cellNumber%7==1 && $cellContent != null){
+                return '<li id="li-'.$this->currentDate.'" class="start">'.$cellContent." <span class='weekNum'>".date("W", strtotime($this->currentDate)).'</span> <p class="namn">'. $arrt .'</p></li>';
+            }
+            else if($cellNumber%7==0 && $cellContent != null){
+                return '<li id="li-'.$this->currentDate.'" class="end">'.$cellContent."<p class='namn'>". $arrt .'</p></li>';
+            }
+            else if($cellContent != null){
+                return '<li id="li-'.$this->currentDate.'">'.$cellContent."<p class='namn'>". $arrt .'</p></li>';
+            }
             return '<li id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?'start':($cellNumber%7==0?'end':' ')).
                     ($cellContent==null?'mask':'').'">'.$cellContent.'</li>';
         }
          
+        # THIS FUNCTION DOES NOT WORK AS INTENDED
+        public function birthday(){
+            // $fileName = "birthdays.txt";
+            // $fp = fopen($fileName, "r");
+            // $this->bday = "";
+
+            // $contents = fread($fp, filesize($fileName));
+            // $temp = explode(',', $contents);
+            // for($i=0; $i <= count($temp); $i++){
+            //     $temp2 = explode(".", $temp[$i]);
+            //     if(date('m-d', strtotime($temp[0])) == date('m-d', strtotime($this->currentDate)))
+            //     {
+            //         $this->bday = '<p class="birthday">'.$temp2[1].'</p>';
+            //     }
+            // }
+            
+            // fclose($fp);
+
+            // $fileName = "birthdays.txt";
+            // $fp = fopen($fileName, "r");
+            // $bday = "s";
+            // $contents = fread($fp, filesize($fileName));
+            // $temp = explode('.', $contents);
+            // for($i=0; $i <= count($temp); $i++){
+            //     $temp2 = explode(", ", $temp[$i]);
+            //     $date = $this->currentMonth.'-'.$this->currentDay;
+            //     if(date('m-d', strtotime($temp[$i])) == date('m-d', strtotime($date)))
+            //     {
+            //         $bday = '<p class="birthday">'.$temp2[1].'</p>';
+            //     }
+            // }
+            
+            // fclose($fp);
+        }
+
         /**
         * create navigation
         */
@@ -143,7 +565,7 @@
             $preMonth = $this->currentMonth==1?12:intval($this->currentMonth)-1;
              
             $preYear = $this->currentMonth==1?intval($this->currentYear)-1:$this->currentYear;
-             
+
             return
                 '<div class="header">'.
                     '<a class="prev" href="'.$this->naviHref.'?month='.sprintf('%02d',$preMonth).'&year='.$preYear.'">Prev</a>'.
@@ -155,6 +577,9 @@
         /**
         * create calendar week labels
         */
+
+
+
         private function _createLabels(){  
                      
             $content='';

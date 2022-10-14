@@ -1,4 +1,9 @@
 /*******************************Calendar Top Navigation*********************************/
+body{
+    background: hsl(211, 48%, 44%);
+    min-height: 90vh;
+}
+
 div#calendar{
     margin:0px auto;
     padding:0px;
@@ -58,6 +63,7 @@ div#calendar{
   div#calendar div.box-content{
       border:1px solid #787878 ;
       border-top:none;
+      background: hsl(0, 1%, 41%);
   }
    
    
@@ -101,13 +107,13 @@ div#calendar{
       padding:0px;
       margin-right:5px;
       margin-top: 5px;
-      line-height: 50px;
+      line-height: normal;
       vertical-align:middle;
       float:left;
       list-style-type:none;
       width:80px;
       height:80px;
-      font-size:25px;
+      font-size:12px;
       background-color: #DDD;
       color:#000;
       text-align:center; 
@@ -132,8 +138,116 @@ div#calendar{
 
 
 .weekNum{
-    font-size: 20px;
+    font-size: 100%;
     display: block;
     color:orange;
     line-height: normal;
+}
+.namn{
+    font-size: 100%;
+}
+
+#month{
+    height:250px;
+    width:602px;
+    margin: auto;
+}
+
+.flex{
+    display:flex;
+    align-items: center;
+}
+
+.birthday{
+    background-color: lightblue;
+    height:30%;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+#screen{
+    position:absolute;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+}
+
+.btn{
+    transition-duration: 550ms;
+    cursor:pointer;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:1px;
+    padding-bottom:0;
+    text-decoration: none;
+    padding:2px;
+    font-size: 22px;
+}
+
+footer{
+    margin-top:8.5%;
+    -webkit-box-flex:0;
+    -ms-flex:0 auto;
+    flex:0 auto;
+}
+.pa0{
+    padding:0;
+}
+
+.relative{
+    position:relative;
+    bottom:0;
+}
+
+#footbar{
+    padding:2px;
+    padding-top:3px;
+    margin:0;
+    background:silver;
+    border-top: 1px solid silver;
+    border-left: 1px solid silver;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    box-shadow: inset 1px 1px #dfdfdf,1px 0 #000,0 1px #000,1px 1px #000;
+    background-color: silver;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+}
+
+.btn, button:not(.unstyled), input[type=text], input[type=submit], input[type=button]{
+    color: #000;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    box-shadow: inset 1px 1px #dfdfdf,1px 0 #000,0 1px #000,1px 1px #000;
+    background-color: silver;
+}
+
+.btn, button:not(.unstyled), input[type=text], input[type=submit], input[type=button] {
+    line-height: 16px;
+    padding: 1px 6px;
+    overflow: hidden;
+}
+
+.btn:hover{
+    color:white;
+    
+}
+
+#layout{
+    height:auto;
+    padding: 0;
 }
