@@ -1,6 +1,7 @@
 <?php
     class Calendar {  
-
+        
+     
         /**
          * Constructor
          */
@@ -15,6 +16,7 @@
          
         private $currentMonth=0;
          
+        private $bday="";
 
         private $nameDays = [
             [],
@@ -476,7 +478,30 @@
                      
                 }
             }
-            
+            $fileName = "birthdays.txt";
+            $fp = fopen($fileName, "r");
+            $contents = fread($fp, filesize($fileName));
+            $name_and_Date = explode(',', $contents);
+            foreach($name_and_Date as $dates){
+                $name = explode(".", $dates);
+                $dateTest = explode('.', $dates);
+                if($this->currentDay < 10){
+                    $dateT = $this->currentMonth.'-0'.$this->currentDay;
+                }
+                else{
+                    $dateT = $this->currentMonth.'-'.$this->currentDay;
+                }
+                
+                $dateE = substr($dateTest[0],5);
+
+                if($dateE == $dateT)
+                {
+                    $this->bday = '<p class="birthday">'.$name[1].'🎂</p>';
+                    break;
+                }
+                else $this->bday = "";
+            }
+            fclose($fp);
 
             if( ($this->currentDay!=0)&&($this->currentDay<=$this->daysInMonth) ){
                  
@@ -503,54 +528,18 @@
                 $arrt = implode(' ', $this->nameDays[$day365]);
             }
             
-            
 
             if($cellNumber%7==1 && $cellContent != null){
-                return '<li id="li-'.$this->currentDate.'" class="start">'.$cellContent." <span class='weekNum'>".date("W", strtotime($this->currentDate)).'</span> <p class="namn">'. $arrt .'</p></li>';
+                return '<li id="li-'.$this->currentDate.'" class="start">'.$cellContent." <span class='weekNum'>".date("W", strtotime($this->currentDate)).'</span> <p class="namn">'. $arrt .'</p>'.$this->bday.'</li>';
             }
             else if($cellNumber%7==0 && $cellContent != null){
-                return '<li id="li-'.$this->currentDate.'" class="end">'.$cellContent."<p class='namn'>". $arrt .'</p></li>';
+                return '<li id="li-'.$this->currentDate.'" class="end">'.$cellContent."<p class='namn'>". $arrt .'</p>'.$this->bday.'</li>';
             }
             else if($cellContent != null){
-                return '<li id="li-'.$this->currentDate.'">'.$cellContent."<p class='namn'>". $arrt .'</p></li>';
+                return '<li id="li-'.$this->currentDate.'">'.$cellContent."<p class='namn'>". $arrt .'</p>'.$this->bday.'</li>';
             }
             return '<li id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?'start':($cellNumber%7==0?'end':' ')).
                     ($cellContent==null?'mask':'').'">'.$cellContent.'</li>';
-        }
-         
-        # THIS FUNCTION DOES NOT WORK AS INTENDED
-        public function birthday(){
-            // $fileName = "birthdays.txt";
-            // $fp = fopen($fileName, "r");
-            // $this->bday = "";
-
-            // $contents = fread($fp, filesize($fileName));
-            // $temp = explode(',', $contents);
-            // for($i=0; $i <= count($temp); $i++){
-            //     $temp2 = explode(".", $temp[$i]);
-            //     if(date('m-d', strtotime($temp[0])) == date('m-d', strtotime($this->currentDate)))
-            //     {
-            //         $this->bday = '<p class="birthday">'.$temp2[1].'</p>';
-            //     }
-            // }
-            
-            // fclose($fp);
-
-            // $fileName = "birthdays.txt";
-            // $fp = fopen($fileName, "r");
-            // $bday = "s";
-            // $contents = fread($fp, filesize($fileName));
-            // $temp = explode('.', $contents);
-            // for($i=0; $i <= count($temp); $i++){
-            //     $temp2 = explode(", ", $temp[$i]);
-            //     $date = $this->currentMonth.'-'.$this->currentDay;
-            //     if(date('m-d', strtotime($temp[$i])) == date('m-d', strtotime($date)))
-            //     {
-            //         $bday = '<p class="birthday">'.$temp2[1].'</p>';
-            //     }
-            // }
-            
-            // fclose($fp);
         }
 
         /**

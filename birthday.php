@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Birthday</title>
-        <link rel="stylesheet" href="style/index.css">
+        <link rel="stylesheet" href="style/calendar.css">
     </head>
     <body>
-        <form action="index.php" method="POST">
+        <form action="#" method="POST">
             <label for="birthday">Birthday</label>
             <input type="date" name="birthday">
             <br>
@@ -26,6 +26,7 @@
                 $data = ','.$data_bday.'.'.$data_name;
                 fwrite($fp, $data);
                 fclose($fp);
+                header("Location: index.php?month=07&year=2022");
             }
         ?>
     </body>
